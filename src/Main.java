@@ -6,7 +6,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
 
         boolean running = true;
-        boolean loggedIn = true;
+        boolean loggedIn = false;
 
         //---- Object Info ----//
 
@@ -35,6 +35,12 @@ public class Main {
         clearScreen();
 
         System.out.println("Welcome to the School Database Management System (SDMS)\nPlease chose a command from the list:\n");
+
+        while (!loggedIn){
+            System.out.println("Enter the correct password to continue:");
+
+            String passwordInput = scan.next();
+        }
 
         while (running && loggedIn) {
             System.out.println("1. List"
