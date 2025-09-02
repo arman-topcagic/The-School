@@ -19,11 +19,11 @@ public class Student {
 
     Scanner scan = new Scanner(System.in);
 
-    public void changeName() {
-
+    public void changeName(String name) {
+        this.name = name;
     }
-    public void changeAge() {
-
+    public void changeAge(int age) {
+        this.age = age;
     }
 
 }
