@@ -1,12 +1,8 @@
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         Scanner scan = new Scanner(System.in);
-
-        boolean running = true;
-        boolean loggedIn = false;
 
         //---- Object Info ----//
 
@@ -22,19 +18,22 @@ public class Main {
 
         //---- ........... ----//
 
-        Administrator admin1 = new Administrator("Hugo", 21, 35000, "IT");
-        Administrator admin2 = new Administrator("Grabben", 52, 45000, "IT");
-        Administrator admin3 = new Administrator("Lars", 80, 40000, "IT");
+        Administrator admin1 = new Administrator("Hugo", 21, 82, "IT");
+        Administrator admin2 = new Administrator("Lisa", 52, 12, "IT");
+        Administrator admin3 = new Administrator("Lars", 80, 50000, "IT");
 
         //---- ........... ----//
 
         System.out.println("Welcome to the School Database Management System (SDMS)\nPlease chose a command from the list:\n");
 
-        while (running) {
+        while (true) {
 
-            System.out.println("1. List"
-                    + "\n2. Edit"
-                    + "\n3. Exit");
+            System.out.println("""
+                    1. List\
+                    
+                    2. Edit\
+                    
+                    3. Exit""");
             String choice = scan.nextLine();
 
             switch (choice) {
@@ -47,13 +46,19 @@ public class Main {
                     System.out.println("\n----Teachers----");
                     System.out.println(teacher1.getListInfo());
                     System.out.println(teacher2.getListInfo());
-                    System.out.println(teacher3.getListInfo() + "\n");
+                    System.out.println(teacher3.getListInfo());
+
+                    System.out.println("\n----Administrators----");
+                    System.out.println(admin1.getListInfo());
+                    System.out.println(admin2.getListInfo());
+                    System.out.println(admin3.getListInfo() + "\n");
                     break;
 
                 case "2":
                     System.out.println("\nEdit Menu:");
                     System.out.println("1. Edit Student");
                     System.out.println("2. Edit Teacher");
+                    System.out.println("3. Edit Administrator");
                     String editChoice = scan.nextLine();
 
                     if (editChoice.equals("1")) {
@@ -108,14 +113,39 @@ public class Main {
 
                         System.out.println("\nTeacher updated!\n");
 
+                    } else if (editChoice.equals("3")) {
+                        System.out.println("\nChoose admin to edit:");
+                        System.out.println("1. " + admin1.name);
+                        System.out.println("2. " + admin2.name);
+                        System.out.println("3. " + admin3.name);
+                        String adminChoice = scan.nextLine();
+
+                        Administrator selectedAdmin = null;
+
+                        switch (adminChoice) {
+                            case "1": selectedAdmin = admin1; break;
+                            case "2": selectedAdmin = admin2; break;
+                            case "3": selectedAdmin = admin3; break;
+                            default: System.out.println("Invalid choice.\n"); continue;
+                        }
+
+                        System.out.println("\nEnter new name: ");
+                        String newTeacherName = scan.nextLine();
+                        selectedAdmin.changeName(newTeacherName);
+
+                        System.out.println("\nEnter new age: ");
+                        int newAdminAge = Integer.parseInt(scan.nextLine());
+                        selectedAdmin.changeAge(newAdminAge);
+
+                        System.out.println("\nAdmin updated!\n");
+
                     } else {
-                        System.out.println("Invalid option.\n");
+                        System.out.println("Error; please choose a valid option.\n");
 
                     }
                     break;
                 case "3":
                     System.out.println("Thank you for using SDMS!");
-                    Thread.sleep(2000);
                     System.exit(0);
                     break;
                 default:
